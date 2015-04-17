@@ -1,0 +1,79 @@
+<ion-view hide-nav-bar="true">
+    <ion-content class="dashboard padding">
+        <div ng-switch="model.state">
+
+            <div ng-switch-when="WELCOME">
+                <h1>Ready?</h1>
+                <button class="button button-large button-energized">
+                  <i class="icon ion-android-wifi"></i>
+                  Scan your device
+                </button>
+            </div>
+
+            <div ng-switch-when="ADD">
+                <h3>Adding Device</h3>
+
+                <div class="list">
+
+                    <label class="item item-input item-stacked-label">
+                        <input type="text" disabled ng-model="newDevice.nfcID">
+                    </label>
+
+                    <label class="item item-input item-stacked-label">
+                        <span class="input-label">Identifier</span>
+                        <input ng-model="newDevice.identifier" type="text" placeholder="000000">
+                    </label>
+
+                    <label class="item item-input item-stacked-label">
+                        <span class="input-label">Identifier Again</span>
+                        <input type="text" placeholder="000000">
+                    </label>
+
+                    <label class="item item-input item-select">
+                        <div class="input-label">
+                          Status
+                        </div>
+                        <select ng-model="newDevice.status">
+                            <option ng-repeat="(optionId, option) in statusOptions"
+                                ng-value="optionId" >{{option.name}}</option>
+                        </select>
+                    </label>
+
+                    <label class="item item-input">
+                        <button ng-click="addDevice()" class="button">Add New Device</button>
+                        <button ng-click="model.state='WELCOME'" class="button">Cancel</button>
+                    </label>
+
+                </div>
+            </div>
+
+            <div ng-switch-when="EDIT">
+
+                <div class="list">
+
+                    <div class="item">
+                       Editing Device <b>{{editingDevice.identifier}}</b>
+                    </div>
+
+                    <label class="item item-input item-select">
+                        <div class="input-label">
+                          Status
+                        </div>
+                        <select ng-model="editingDevice.status">
+                            <option ng-repeat="(optionId, option) in statusOptions"
+                                ng-value="optionId" >{{option.name}}</option>
+                        </select>
+                    </label>
+
+                    <label class="item item-input">
+                        <button ng-click="updateDevice()" class="button">Update device</button>
+                        <button ng-click="model.state='WELCOME'" class="button">Cancel</button>
+                    </label>
+
+                </div>
+
+            </div>
+
+        </div>
+    </ion-content>
+</ion-view>
